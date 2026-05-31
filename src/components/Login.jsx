@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("Sandy@gmail.com");
   const [password, setPassword] = useState("Sandy@2026");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,10 +20,12 @@ const Login = () => {
         withCredentials: true,
       });
       if (response?.data?.user) {
-        return dispatch(addUser(response?.data?.user));
+        dispatch(addUser(response?.data?.user));
+        navigate("/");
       }
     } catch (err) {
-      console.log("Error " + err);
+      console.log("Error:  " + err);
+      setError(err?.message || "An error occurred during login.");
     }
   };
 
@@ -99,10 +104,20 @@ const Login = () => {
               At least one uppercase letter
             </p>
           </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>
+          </div>
+
+          <div className="text-center my-4">
+            <p>
+              Don't have an account ?
+              <NavLink to="/signup" className="link text-blue-500 ml-1">
+                Sign up
+              </NavLink>
+            </p>
           </div>
         </div>
       </div>
