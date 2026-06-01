@@ -3,6 +3,7 @@ import React from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 
 const CreateAccount = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -19,31 +20,36 @@ const CreateAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     try {
-      let response = await axios.post(`${BASE_URL}/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
-        gender,
-        age,
-        skills,
-        about,
-        photoUrl,
-      });
+      let response = await axios.post(
+        `${BASE_URL}/signup`,
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          gender,
+          age,
+          skills,
+          about,
+          photoUrl,
+        },
+        {
+          withCredentials: true,
+        },
+      );
       dispatch(addUser(response?.data?.user));
-      if (response?.data) {
-        // Redirect or perform any other actions after successful account creation
-        setToast(true);
-        setTimeout(() => {
-          setToast(false);
-        }, 3000);
-        navigate("/login");
-      }
+      // Redirect or perform any other actions after successful account creation
+      setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 3000);
+      return navigate("/"); // Redirect to home after successful account creation
     } catch (error) {
+      navigate("/login");
       console.error("Error creating account:", error);
     }
   };
@@ -114,7 +120,7 @@ const CreateAccount = () => {
             className="input"
             placeholder="Age"
             value={age}
-            onChange={(e) => setAge(e.target.value)}
+            onChange={(e) => setAge(e.target.value || "")}
           />
 
           <label className="label">Skills</label>
@@ -144,7 +150,7 @@ const CreateAccount = () => {
           />
 
           <div className="flex justify-center">
-            <button className="btn btn-primary mt-4" onClick={handleSubmit}>
+            <button className="btn btn-primary mt-4" onClick={handleSignup}>
               Create Account
             </button>
           </div>
