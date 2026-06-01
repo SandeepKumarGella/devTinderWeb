@@ -22,7 +22,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <NavLink className="btn btn-ghost text-xl" to="/">
+        <NavLink className="btn btn-ghost text-xl" to={user ? "/" : "/login"}>
           😉 DevTinder
         </NavLink>
       </div>
@@ -36,12 +36,12 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="User profile pic" src={user?.photoUrl} />
+                <img alt="User-profile-pic" src={user?.photoUrl} />
               </div>
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
                 <Link className="justify-between" to="/profile">

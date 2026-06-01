@@ -71,15 +71,6 @@ const EditProfile = ({ user }) => {
             onChange={(e) => setLastName(e.target.value)}
           />
 
-          <label className="label">Email</label>
-          <input
-            type="email"
-            className="input"
-            placeholder="Email"
-            readOnly
-            value={user.email}
-          />
-
           <label className="label">Gender</label>
           <select
             value={gender}

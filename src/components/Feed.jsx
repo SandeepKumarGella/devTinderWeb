@@ -23,7 +23,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchFeed();
-  }, [user?._id]); // Refetch feed when user changes
+  }, []);
 
   return (
     <div>
