@@ -37,7 +37,6 @@ const EditProfile = ({ user }) => {
       if (response.status === 200) {
         // Dispatch an action to update the user profile in the Redux store
         setToast(true);
-        console.log("response", response);
         dispatch(addUser(response?.data?.userDetails));
       }
       setTimeout(() => {
@@ -127,9 +126,11 @@ const EditProfile = ({ user }) => {
             onChange={(e) => setPhotoUrl(e.target.value)}
           />
 
-          <button className="btn btn-neutral mt-4" onClick={handleSave}>
-            Save
-          </button>
+          <div className="flex justify-center">
+            <button className="btn btn-primary mt-4" onClick={handleSave}>
+              Save
+            </button>
+          </div>
         </fieldset>
       </div>
       <div className="my-10">
@@ -160,10 +161,6 @@ const EditProfile = ({ user }) => {
             ) : (
               <p>No skills listed</p>
             )}
-            <div className="flex justify-center">
-              <button className="btn btn-primary mt-4">Like</button>
-              <button className="btn btn-secondary mt-4 ml-4">Dislike</button>
-            </div>
           </div>
         </div>
       </div>

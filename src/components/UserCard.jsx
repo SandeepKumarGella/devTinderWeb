@@ -1,6 +1,29 @@
 import React from "react";
+import { addRequest } from "../utils/requestSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = ({ users }) => {
+  const dispatch = useDispatch();
+
+  const sendRequest = async (status, id) => {
+    try {
+      let response = await axios.post(
+        `${BASE_URL}/request/send/${status}/${id}`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+      dispatch(addRequest(response?.data?.connections?.fromUserId));
+      dispatch(removeFeed(response.data?.connections?.toUserId));
+    } catch (err) {
+      console.log("fetching requests", err.message);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-8 mt-8 pb-20">
       {users?.length > 0 &&
@@ -36,8 +59,18 @@ const UserCard = ({ users }) => {
                 <p>No skills listed</p>
               )}
               <div className="flex justify-center">
-                <button className="btn btn-primary mt-4">Like</button>
-                <button className="btn btn-secondary mt-4 ml-4">Dislike</button>
+                <button
+                  className="btn btn-primary mt-4"
+                  onClick={() => sendRequest("interested", user._id)}
+                >
+                  Like
+                </button>
+                <button
+                  className="btn btn-secondary mt-4 ml-4"
+                  onClick={() => sendRequest("ignored", user._id)}
+                >
+                  Dislike
+                </button>
               </div>
             </div>
           </div>
