@@ -34,15 +34,14 @@ const CreateAccount = () => {
         about,
         photoUrl,
       });
-      console.log("Account created successfully:", response?.data);
       dispatch(addUser(response?.data?.user));
-      if (response?.user) {
+      if (response?.data) {
         // Redirect or perform any other actions after successful account creation
-        navigate("/login");
         setToast(true);
         setTimeout(() => {
           setToast(false);
         }, 3000);
+        navigate("/login");
       }
     } catch (error) {
       console.error("Error creating account:", error);
@@ -54,7 +53,7 @@ const CreateAccount = () => {
       {toast && (
         <div className="toast toast-top toast-end">
           <div className="alert alert-success">
-            <span>User updated Successfully!</span>
+            <span>Account Created Successfully!</span>
           </div>
         </div>
       )}
@@ -144,9 +143,11 @@ const CreateAccount = () => {
             onChange={(e) => setPhotoUrl(e.target.value)}
           />
 
-          <button className="btn btn-neutral mt-4" onClick={handleSubmit}>
-            Create Account
-          </button>
+          <div className="flex justify-center">
+            <button className="btn btn-primary mt-4" onClick={handleSubmit}>
+              Create Account
+            </button>
+          </div>
         </fieldset>
       </div>
     </div>
