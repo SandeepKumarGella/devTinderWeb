@@ -7,6 +7,7 @@ import Feed from "./components/Feed";
 import CreateAccount from "./components/CreateAccount";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import Chat from "./components/Chat";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/requests" element={<Requests />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/chat/:toUserId" element={<Chat />} />
         </Route>
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
