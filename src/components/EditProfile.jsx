@@ -128,7 +128,7 @@ const EditProfile = ({ user }) => {
         <div className="card bg-base-300 w-96 shadow-sm">
           <figure>
             <img
-              src={photoUrl || "https://placeimg.com/400/225/arch"}
+              src={photoUrl ? photoUrl : "/assets/profile.png"}
               alt="profile-pic"
               className="w-full h-80 object-fit"
             />

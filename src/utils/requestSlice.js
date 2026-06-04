@@ -6,21 +6,22 @@ const requestSlice = createSlice({
   reducers: {
     addRequest: (state, action) => {
       // accept array (replace) or single request object (append if not exists)
-      if (Array.isArray(action.payload)) return action.payload;
-      if (!action.payload) return state;
-      const payload = action.payload;
-      // support payload being a request or a nested user (fromUserId)
-      const id =
-        payload._id ||
-        payload.id ||
-        payload.fromUserId?._id ||
-        payload.fromUserId?.id;
-      if (!id) return state;
-      const exists = state.some(
-        (r) => r._id === id || r.fromUserId?._id === id || r.id === id,
-      );
-      if (exists) return state;
-      return [...state, payload];
+      // if (Array.isArray(action.payload)) return action.payload;
+      // if (!action.payload) return state;
+      // const payload = action.payload;
+      // // support payload being a request or a nested user (fromUserId)
+      // const id =
+      //   payload._id ||
+      //   payload.id ||
+      //   payload.fromUserId?._id ||
+      //   payload.fromUserId?.id;
+      // if (!id) return state;
+      // const exists = state.some(
+      //   (r) => r._id === id || r.fromUserId?._id === id || r.id === id,
+      // );
+      // if (exists) return state;
+      //return [...state, payload];
+      return action.payload;
     },
     removeRequest: (state, action) => {
       const id =

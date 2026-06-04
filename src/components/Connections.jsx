@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addConnection } from "../utils/connectionSlice";
+import { Link } from "react-router-dom";
 
 const Connections = () => {
   const connections = useSelector((state) => state.connections);
@@ -65,6 +66,11 @@ const Connections = () => {
                     ) : (
                       <p>No skills listed</p>
                     )}
+                  </div>
+                  <div>
+                    <Link to={`/chat/${connection._id}`}>
+                      <button className="btn btn-primary">Chat</button>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -6,13 +6,13 @@ const connectionSlice = createSlice({
   reducers: {
     addConnection: (state, action) => {
       // accept array (replace) or single connection (append if not exists)
-      if (Array.isArray(action.payload)) return action.payload;
-      if (!action.payload) return state;
-      const payload = action.payload;
-      const id = payload._id || payload.id;
-      if (!id) return state;
-      if (state.some((c) => c._id === id || c.id === id)) return state;
-      return [...state, payload];
+      // if (Array.isArray(action.payload)) return action.payload;
+      // if (!action.payload) return state;
+      // const payload = action.payload;
+      // const id = payload._id || payload.id;
+      // if (!id) return state;
+      // if (state.some((c) => c._id === id || c.id === id)) return state;
+      return action.payload;
     },
     removeConnection: (state, action) => {
       const id =
